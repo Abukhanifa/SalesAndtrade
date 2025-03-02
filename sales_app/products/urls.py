@@ -10,7 +10,7 @@ router.register(r'categories', CategoryViewAPI)
 
 
 urlpatterns = [
-    path('product-list/', ProductListView.as_view(), name='product_list'),
+    path('product_list/', ProductListView.as_view(), name='product_list'),
     path('create/', ProductCreateView.as_view(), name='product-create'),
     path('<int:pk>/update/', ProductUpdateView.as_view(), name='product-update'),
     path('<int:pk>/delete/', ProductDeleteView.as_view(), name='product-delete'),

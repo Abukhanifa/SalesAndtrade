@@ -45,7 +45,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm  # Use the form
     template_name = "products/product_create.html"  # Keep your existing template
-    success_url = reverse_lazy("product-list")  # Redirect after success
+    success_url = reverse_lazy("product_list")  # Redirect after success
 
     def form_valid(self, form):
         product = form.save(commit=False)  # Don't save yet
