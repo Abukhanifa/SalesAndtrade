@@ -1,0 +1,34 @@
+{% extends "homepage/base.html" %}
+
+{% block content %}
+
+<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+    <div style="position: absolute; top: 0; right: 0;">
+        {% for notification in notifications %}
+        <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+            <div class="toast-header d-flex align-items-center">
+                <strong class="mr-auto">Notification</strong>
+                <small class="text-muted ms-auto me-3">{{ notification.timestamp|timesince }} ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                {{ notification.message }}
+            </div>
+        </div>
+        {% empty %}
+        <p>No notifications available.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Ensure Bootstrap JavaScript is properly loaded -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        var toastList = toastElList.map(function (toastEl) {
+            return new bootstrap.Toast(toastEl);
+        });
+    });
+</script>
+
+{% endblock %}

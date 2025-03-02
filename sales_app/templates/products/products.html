@@ -1,0 +1,45 @@
+{% extends "homepage/base.html" %}
+{% block content %}
+{% load static %}
+
+<h1> Product List </h1> <br/>
+
+<!-- Category Filter Dropdown -->
+<div class="dropdown mb-3">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+      Filter by Category
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <li><a class="dropdown-item" href="{% url 'product_list' %}">All Categories</a></li>
+      {% for category in categories %}
+        <li><a class="dropdown-item" href="{% url 'product_list' %}?category={{ category.id }}">{{ category.name }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  
+
+{% for product in products %}
+<div class="card mb-3" style="max-width: 580px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="{{ product.name }}">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description }}</p>
+                <p class="card-text"><small class="text-body-secondary">Price: {{ product.price }}</small></p>
+                <p class="card-text">Category: {{ product.category }}</p>
+
+                <!-- Buy Button -->
+                <a href="{% url 'create_checkout_session' product.id %}" class="btn btn-primary btn-sm">Buy product</a>
+
+                <!-- Trade Button -->
+                <a href="{% url 'create_trade_request' product.id %}" class="btn btn-primary btn-sm">Trade</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

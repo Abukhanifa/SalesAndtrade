@@ -1,0 +1,9 @@
+<h2>Confirm Trade</h2>
+<p>Trading <b>{{ trade.offered_product.name }}</b> for <b>{{ trade.requested_product.name }}</b></p>
+<p>Trader: {{ trade.trader.username }}</p>
+<p>Customer: {{ trade.customer.username }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirm Trade</button>
+</form>

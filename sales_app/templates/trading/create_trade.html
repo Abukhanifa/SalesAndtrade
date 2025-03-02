@@ -1,0 +1,11 @@
+<h2>Trade Request for {{ requested_product.name }}</h2>
+<form method="post">
+    {% csrf_token %}
+    <label for="offered_product">Select Your Product to Offer:</label>
+    <select name="offered_product">
+        {% for product in user_products %}
+            <option value="{{ product.id }}">{{ product.name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Send Trade Request</button>
+</form>
